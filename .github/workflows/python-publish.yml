@@ -1,0 +1,49 @@
+name: Update Currency Data
+
+#on:
+#  workflow_dispatch:
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  # Job اول: دانلود و استخراج نسخه با bash
+  gif_job:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      # Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+      # نصب پایتون
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'  # می‌توانید نسخه مورد نظر پایتون را انتخاب کنید.
+
+      # نصب وابستگی‌های پایتون
+      - name: Install dependencies for Python
+        run: |
+          wget https://drive.usercontent.google.com/download?id=14wwKO-6fYisuihORRhg1AkpbCxOXJYJ8&export=download
+          
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "🚀 Updated - $(TZ='Asia/Tehran' date '+%Y-%m-%d %H:%M:%S')"
+          git push
