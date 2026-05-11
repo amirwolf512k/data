@@ -31,7 +31,7 @@ jobs:
       # نصب وابستگی‌های پایتون
       - name: Install dependencies for Python
         run: |
-          wget -O purvpn.mp4 "https://drive.usercontent.google.com/download?id=14wwKO-6fYisuihORRhg1AkpbCxOXJYJ8&export=download"
+          wget -O video.mp4 "https://drive.usercontent.google.com/download?id=11wu7_UtX4a7OmpIdyxMb4ID9GvWgaNRP&export=download"
           
       - name: Commit and Push Changes
         run: |
