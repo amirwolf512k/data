@@ -15,8 +15,7 @@ RUN ssh-keygen -A
 # 1. فعال‌سازی دسترسی روت
 # 2. غیرفعال‌سازی تخصیص TTY (جلوگیری از باز شدن کنسول و ترمینال)
 RUN sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
-    echo "PermitTTY no" >> /etc/ssh/sshd_config
+    sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
 # ساخت اسکریپت ورودی برای اجرای SSHD روی پورت 8080
 RUN echo -e '#!/bin/sh\n\
